@@ -1,5 +1,7 @@
 # Cielo24
 
+[ ![Codeship Status for commondream/cielo24](https://www.codeship.io/projects/3b4c3d90-e3ac-0131-3a67-06aaa1f2b67c/status)](https://www.codeship.io/projects/25486)
+
 Cielo24 is a service for creating video captions and transcripts. This library interacts with the Cielo24 API to submit and retrieve captions. Cielo24 API documentation is available [here](http://cielo24.com/static/cielo24/documents/Cielo24ServicesAPI-v1.4.9.pdf).
 
 This is currently an incomplete implementation fo the Cielo24 API to solve my personal needs. Feel free to send a pull request if you want to complete more of the API.
