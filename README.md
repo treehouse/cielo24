@@ -1,3 +1,5 @@
+# This repository is here for historical purposes only now. The team at Cielo24 is now maintaining the cielo24 gem in their own repository.
+
 # Cielo24
 
 [ ![Codeship Status for commondream/cielo24](https://www.codeship.io/projects/3b4c3d90-e3ac-0131-3a67-06aaa1f2b67c/status)](https://www.codeship.io/projects/25486)
