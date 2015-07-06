@@ -1,9 +1,9 @@
 require_relative "../lib/cielo24"
 
 if ENV["CIELO24_SANDBOX"]
-  Cielo24::Client.configure(username: ENV["CIELO24_SANDBOX_USERNAME"], 
-      password: ENV["CIELO24_SANDBOX_PASSWORD"], 
-      uri: "https://sandbox.cogi.com", verify_mode: OpenSSL::SSL::VERIFY_NONE)
+  Cielo24::Client.configure(username: ENV["CIELO24_SANDBOX_USERNAME"],
+      password: ENV["CIELO24_SANDBOX_PASSWORD"],
+      uri: "https://sandbox.cielo24.com")
 end
 
 
