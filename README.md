@@ -41,7 +41,7 @@ Cielo24::Client.configure({username: "user", securekey: "api_key"})
 You may also authenticate through the Cielo24 sandbox with the following settings (use your own sandbox username and password):
 
 ```
-Cielo24::Client.configure(username: "username", password: "password", 
+Cielo24::Client.configure(username: "username", password: "password",
     uri: "https://sandbox.cielo24.com", verify_mode: OpenSSL::SSL::VERIFY_NONE)
 ```
 
@@ -59,7 +59,7 @@ Captioning defaults to professional fidelity and standard priority.
 ### Checking if captions are complete:
 
 ```
-client.task_complete?(task_id)
+client.task_complete?(job_id, task_id)
 ```
 
 ### Downloading captions:
@@ -98,7 +98,7 @@ json_data = client.job_info(job_id)
 ### Get Task Status:
 
 ```
-json_data = client.task_status(task_id)
+json_data = client.task_status(job_id, task_id)
 ```
 
 ## Contributing

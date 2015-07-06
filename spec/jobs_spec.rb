@@ -9,10 +9,13 @@ describe "Cielo24::Jobs" do
     client.create_job("Test Job")
   end
 
-  let(:job_with_media_id) do
+  let(:media_id) do
     stub_get_json("/api/job/add_media", {"TaskId" => "TASK123"})
     client.add_media(job_id, "http://test.com/media.mp4")
+  end
 
+  let(:job_with_media_id) do
+    media_id
     job_id
   end
 
@@ -50,15 +53,15 @@ describe "Cielo24::Jobs" do
     it "returns true if the task has completed" do
       pending("CANNOT GUARANTEE COMPLETED JOB IN SANDBOX") if test_sandbox?
 
-      stub_get_json("/api/job/task_status", {"TaskStatus" => "COMPLETE"})
-      expect(client.task_complete?("TASK123")).to be_true
+      stub_get_json("/api/job/info", {"Tasks" => [{"TaskId" => "TASK123", "TaskStatus" => "COMPLETE"}]})
+      expect(client.task_complete?("JOB123", "TASK123")).to be_true
     end
 
     it "returns false if the task hasn't completed" do
       pending("CANNOT GUARANTEE INCOMPLETE JOB IN SANDBOX") if test_sandbox?
 
-      stub_get_json("/api/job/task_status", {"TaskStatus" => "INCOMPLETE"})
-      expect(client.task_complete?("TASK123")).to be_false
+      stub_get_json("/api/job/info", {"Tasks" => [{"TaskId" => "TASK123", "TaskStatus" => "INCOMPLETE"}]})
+      expect(client.task_complete?("JOB123", "TASK123")).to be_false
     end
   end
 
@@ -71,8 +74,10 @@ describe "Cielo24::Jobs" do
 
   describe "#task_status" do
     it "returns the task status" do
-      stub_get_json("/api/job/task_status", {"TaskId" => "TASK123", "TaskType" => "JOB_PERFORM_TRANSCRIPT"})
-      expect(client.task_status("TASK123")).to_not be_nil
+      pending("SANDBOX DOESN'T ALWAYS RETURN NEW TASK") if test_sandbox?
+
+      stub_get_json("/api/job/info", {"JobId" => "JOB123", "Tasks" => [{"TaskId" => "TASK123"}]})
+      expect(client.task_status(job_with_media_id, media_id)).to_not be_nil
     end
   end
 

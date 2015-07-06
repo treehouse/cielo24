@@ -52,20 +52,24 @@ module Cielo24
 
     # Public: Requests the status info for a particular task.
     #
+    # job_id - The job containing the task to get info about.
     # task_id - The task to get info about.
     #
     # Returns the task info as JSON
-    def task_status(task_id)
-      get_json("/api/job/task_status", {task_id: task_id})
+    def task_status(job_id, task_id)
+      tasks = job_info(job_id)["Tasks"]
+      tasks && tasks.find { |t| t["TaskId"] == task_id }
     end
 
     # Public: Returns whether or not a task has completed.
     #
+    # job_id - The job containing the task to check status for.
     # task_id - The task to check status for.
     #
     # Returns true if the task is complete, false otherwise.
-    def task_complete?(task_id)
-      task_status(task_id)["TaskStatus"] == "COMPLETE"
+    def task_complete?(job_id, task_id)
+      status = task_status(job_id, task_id)
+      status && status["TaskStatus"] == "COMPLETE"
     end
 
     # Public: Gets the caption results from a job.
