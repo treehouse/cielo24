@@ -49,6 +49,22 @@ describe "Cielo24::Jobs" do
     end
   end
 
+  describe "#job_complete?" do
+    it "returns true if the job has completed" do
+      pending("CANNOT GUARANTEE COMPLETED JOB IN SANDBOX") if test_sandbox?
+
+      stub_get_json("/api/job/info", {"JobStatus" => "Complete"})
+      expect(client.job_complete?("JOB123")).to be_true
+    end
+
+    it "returns false if the job hasn't completed" do
+      pending("CANNOT GUARANTEE INCOMPLETE JOB IN SANDBOX") if test_sandbox?
+
+      stub_get_json("/api/job/info", {"JobStatus" => "In Process"})
+      expect(client.job_complete?("JOB123")).to be_false
+    end
+  end
+
   describe "#task_complete?" do
     it "returns true if the task has completed" do
       pending("CANNOT GUARANTEE COMPLETED JOB IN SANDBOX") if test_sandbox?

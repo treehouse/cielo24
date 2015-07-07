@@ -50,6 +50,15 @@ module Cielo24
       get_json("/api/job/info", {job_id: job_id})
     end
 
+    # Public: Returns whether or not a job has completed.
+    #
+    # job_id - The job to check for completion.
+    #
+    # Returns true if the job is complete, false otherwise.
+    def job_complete?(job_id)
+      job_info(job_id)["JobStatus"] == "Complete"
+    end
+
     # Public: Requests the status info for a particular task.
     #
     # job_id - The job containing the task to get info about.
