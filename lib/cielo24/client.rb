@@ -45,6 +45,7 @@ module Cielo24
     def connect
       connection = HTTPClient.new
       connection.cookie_manager = nil
+      connection.ssl_config.set_default_paths
 
       unless self.class.options[:verify_mode] == nil
         connection.ssl_config.verify_mode = self.class.options[:verify_mode]
